@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">To-Do List</h1>
+        <div class="input-group">
+            <input type="text" id="new-task" class="form-control" placeholder="Enter new task">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button" id="add-task">Add</button>
+            </div>
+        </div>
+        <ul id="task-list" class="list-group">
+            
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(function() {
+            $('#add-task').click(function() {
+            const taskText = $('#new-task').val();
+            if(taskText) {
+            const taskItem = $('<li>', {
+                class: 'list-group-item d-flex justify-content-between',
+            }).append(
+                $('<span>', { text: taskText }),
+                $('<button>', {
+                    class: 'btn btn-success btn-sm ml-auto',
+                    text: 'Complete',
+                    click: function() {
+                        $(this).closest('li').find('span').toggleClass('completed');
+                    },
+                }),
+                $('<button>', {
+                    class: 'btn btn-danger btn-sm ml-2',
+                    text: 'Delete',
+                    click: function() {
+                        $(this).closest('li').remove();
+                    },
+                })
+            );
+            $('#task-list').append(taskItem);
+            $('#new-task').val('');
+        }
+    });
+});
+
+    </script>
+</body>
+</html>
